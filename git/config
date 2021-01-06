@@ -1,0 +1,50 @@
+
+[pull]
+        rebase = true
+[user]
+        name = Shempignon
+	email = nicolas@pointndots.com
+[rerere]
+        enabled = true
+[color]
+        branch = auto
+        diff = auto
+        interactive = auto
+        status = auto
+[alias]
+        st = status
+        ci = commit
+        cia = commit --amend
+        co = checkout
+        br = branch
+        glog = log --oneline --graph
+        ps = push
+        psf = push --force-with-lease
+        pl = pull
+        ria = rebase -i --autosquash
+        sl = log --graph --pretty=oneline --abbrev-commit --decorate
+        cp = cherry-pick
+        lasttag = describe --tags --abbrev=0 i
+        ours = "!f() { git co --ours $@ && git add $@; }; f"        
+        theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+        ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%Creset %s %C(yellow)%d %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+        dr  = "!f() { git diff "$1"^.."$1"; }; f"
+        lc  = "!f() { git ll "$1"^.."$1"; }; f"
+        diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+        d = difftool
+        fa = fetch --all
+        ful = commit --fixup HEAD
+[core]
+        editor = vim
+        excludesfile = ~/.config/git/ignore
+[diff]
+        tool = vimdiff
+[difftool]
+        prompt = false
+[help]
+        autocorrect = 15
+[gpg]
+        program = gpg2
+[init]
+	defaultBranch = main
