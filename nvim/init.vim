@@ -51,6 +51,7 @@ set incsearch
 set completeopt=menuone,preview,noinsert
 set wrap
 set background=dark
+set guicursor=
 
 let g:material_style='palenight'
 let g:airline_theme='material'
