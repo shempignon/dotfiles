@@ -1,0 +1,77 @@
+[character]
+success_symbol = "[🍑](bold green)"
+error_symbol = "[🍆](bold red) "
+
+[directory]
+home_symbol="🦚"
+style="bold bright-yellow"
+
+[git_status]
+stashed=""
+renamed=""
+staged="🌯"
+conflicted="🤺"
+ahead="🚀"
+behind="🛶"
+modified="🌮"
+diverged="🤦"
+deleted="🔪"
+untracked="🍙"
+format="[$all_status$ahead_behind]($style) "
+
+[git_branch]
+format="[$branch]($style) "
+style="bold bright-purple"
+
+[package]
+disabled=true
+[dart]
+disabled=true
+[dotnet]
+disabled=true
+[elixir]
+disabled=true
+[elm]
+disabled=true
+[erlang]
+disabled=true
+[golang]
+disabled=true
+[java]
+disabled=true
+[julia]
+disabled=true
+[kotlin]
+disabled=true
+[nodejs]
+disabled=true
+[ocaml]
+disabled=true
+[perl]
+disabled=true
+[php]
+disabled=true
+[purescript]
+disabled=true
+[python]
+disabled=true
+[ruby]
+disabled=true
+[rust]
+disabled=true
+[scala]
+disabled=true
+[swift]
+disabled=true
+[conda]
+disabled=true
+[aws]
+disabled=true
+[gcloud]
+disabled=true
+[openstack]
+disabled=true
+[crystal]
+disabled=true
+[lua]
+disabled=true
