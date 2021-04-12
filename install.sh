@@ -6,6 +6,7 @@ printf '\n'
 
 REQUIRED_PACKAGES=("alacritty" "curl" "dunst" "fish" "leftwm" "nodejs" "npm" "neovim" "rofi" "starship" "yarn")
 PARU_REPO="https://aur.archlinux.org/paru.git"
+SCRIPT_PATH="$(dirname $(realpath $0))"
 BOLD="$(tput bold 2>/dev/null || printf '')"
 GREY="$(tput setaf 0 2>/dev/null || printf '')"
 UNDERLINE="$(tput smul 2>/dev/null || printf '')"
@@ -122,7 +123,7 @@ install_vim_plug () {
 
 copy_configs () {
   run_cmd "mkdir --parents ${HOME}/.config"
-  run_cmd "cp --recursive ./config/* ${HOME}/.config"
+  run_cmd "cp --archive ${SCRIPT_PATH}/config/. ${HOME}/.config"
 }
 
 install_nvim_plugings () {
@@ -130,8 +131,8 @@ install_nvim_plugings () {
 }
 
 install_pacman_hooks () {
-  run_cmd "mkdir --parents /etc/pacman.d/hooks"
-  run_cmd "cp --recursive ./hooks/* /etc/pacman.d/hooks"
+  run_cmd "sudo mkdir --parents /etc/pacman.d/hooks"
+  run_cmd "sudo cp --archive ${SCRIPT_PATH}/hooks/. /etc/pacman.d/hooks"
 }
 
 check_if_arch
