@@ -4,7 +4,7 @@ set -eu
 
 printf '\n'
 
-REQUIRED_PACKAGES=("alacritty" "curl" "dunst" "fish" "leftwm" "nodejs" "npm" "neovim" "rofi" "starship" "yarn")
+REQUIRED_PACKAGES=("alacritty" "bat" "curl" "diskonaut" "dunst" "exa" "feh" "fish" "font-victor-mono" "leftwm" "nodejs" "npm" "neovim" "noto-fonts" "noto-fonts-emoji" "noto-fonts-cjk" "noto-fonts-extra" "picom" "polybar" "rofi" "starship" "ttf-fira-code" "yarn")
 PARU_REPO="https://aur.archlinux.org/paru.git"
 SCRIPT_PATH="$(dirname $(realpath $0))"
 BOLD="$(tput bold 2>/dev/null || printf '')"
@@ -126,6 +126,10 @@ copy_configs () {
   run_cmd "cp --archive ${SCRIPT_PATH}/config/. ${HOME}/.config"
 }
 
+install_leftwm_theme () {
+  run_cmd "ln -sf ${HOME}/.config/leftwm/themes/Own ${HOME}/.config/leftwm/themes/current"
+}
+
 install_nvim_plugings () {
    run_cmd "nvim +PlugInstall +qa"
 }
@@ -135,11 +139,17 @@ install_pacman_hooks () {
   run_cmd "sudo cp --archive ${SCRIPT_PATH}/hooks/. /etc/pacman.d/hooks"
 }
 
+change_shell () {
+  run_cmd "chsh -s /bin/fish"
+}
+
 check_if_arch
 install_rust
 install_paru
 install_packages
 install_vim_plug
 copy_configs
+install_leftwm_theme
 install_nvim_plugings
 install_pacman_hooks
+change_shell
