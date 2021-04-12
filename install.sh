@@ -100,7 +100,6 @@ install_paru () {
 }
 
 install_rust() {
-  # TODO: add rustup hook
   if has cargo; then
     return 0
   fi
@@ -130,6 +129,11 @@ install_nvim_plugings () {
    run_cmd "nvim +PlugInstall +qa"
 }
 
+install_pacman_hooks () {
+  run_cmd "mkdir --parents /etc/pacman.d/hooks"
+  run_cmd "cp --recursive ./hooks/* /etc/pacman.d/hooks"
+}
+
 check_if_arch
 install_rust
 install_paru
@@ -137,3 +141,4 @@ install_packages
 install_vim_plug
 copy_configs
 install_nvim_plugings
+install_pacman_hooks
