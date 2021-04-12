@@ -11,10 +11,6 @@ Plug 'preservim/nerdtree'
 Plug '907th/vim-auto-save'
 Plug 'timonv/vim-cargo'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
 call plug#end()
 
 if (has('nvim'))
