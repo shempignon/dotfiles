@@ -133,7 +133,7 @@ install_leftwm_theme () {
 
 install_nvim_plugings () {
    run_cmd "nvim +PlugInstall +qa"
-   run_cmd "nvim +CocInstall coc-rls coc-git coc-tsserver coc-eslint +qa"
+   run_cmd "nvim +CocInstall coc-rls coc-git coc-tsserver coc-eslint coc-prettier +qa"
 }
 
 install_pacman_hooks () {
