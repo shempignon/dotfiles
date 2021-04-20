@@ -1,7 +1,6 @@
 call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'hzchirs/vim-material'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -11,6 +10,11 @@ Plug 'preservim/nerdtree'
 Plug '907th/vim-auto-save'
 Plug 'timonv/vim-cargo'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'nvim-lua/plenary.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'akinsho/nvim-bufferline.lua'
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 if (has('nvim'))
@@ -46,12 +50,14 @@ set undofile
 set incsearch
 set completeopt=menuone,preview,noinsert
 set wrap
-set background=dark
 set guicursor=
 
-let g:material_style='palenight'
-let g:airline_theme='material'
-colorscheme vim-material
+let g:airline_theme='tokyonight'
+let g:tokyonight_style = 'storm'
+let g:tokyonight_enable_italic = 1
+let g:tokyonight_transparent_background = 1
+
+colorscheme tokyonight
 
 let g:auto_save = 1
 
@@ -63,14 +69,8 @@ map <A-1> :NERDTreeToggle<CR>
 map <A-3> :Commits<CR>
 map <A-w> :GitFiles<CR>
 map <A-q> :Files<CR>
-map <C-S-f> :GGrep<CR>
 map <A-r> :CargoRun<CR>
 map <A-t> :CargoTest<CR>
-
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -83,11 +83,3 @@ nmap <leader>t :vsp term://fish<CR>
 tnoremap <Esc> <C-\><C-n><CR>
 
 autocmd TermOpen * startinsert
-
-" Command for git grep
-" " - fzf#vim#grep(command, with_column, [options], [fullscreen])
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
-
