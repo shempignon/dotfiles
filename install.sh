@@ -4,7 +4,7 @@ set -eu
 
 printf '\n'
 
-REQUIRED_PACKAGES=("alacritty" "bat" "curl" "diskonaut" "dunst" "exa" "feh" "fish" "font-victor-mono" "leftwm" "nodejs" "npm" "neovim" "noto-fonts" "noto-fonts-emoji" "noto-fonts-cjk" "noto-fonts-extra" "picom" "polybar" "rofi" "starship" "ttf-fira-code" "yarn")
+REQUIRED_PACKAGES=("alacritty" "bat" "curl" "diskonaut" "dunst" "exa" "feh" "fish" "font-victor-mono" "leftwm" "nodejs" "npm" "neovim" "noto-fonts" "noto-fonts-emoji" "noto-fonts-cjk" "noto-fonts-extra" "picom" "polybar" "rofi" "starship" "ttf-fira-code" "xkb-qwerty-fr" "yarn")
 PARU_REPO="https://aur.archlinux.org/paru.git"
 SCRIPT_PATH="$(dirname $(realpath $0))"
 BOLD="$(tput bold 2>/dev/null || printf '')"
@@ -124,6 +124,7 @@ install_vim_plug () {
 copy_configs () {
   run_cmd "mkdir --parents ${HOME}/.config"
   run_cmd "cp --archive ${SCRIPT_PATH}/config/. ${HOME}/.config"
+  run_cmd "cp ${SCRIPT_PATH}/.xprofile ${HOME}/.xprofile"
 }
 
 install_leftwm_theme () {
