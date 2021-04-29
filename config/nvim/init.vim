@@ -44,7 +44,7 @@ set list
 set number
 set relativenumber
 set nobackup
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set undodir=~/.config/nvim/undodir
 set undofile
 set incsearch
@@ -55,7 +55,7 @@ set guicursor=
 let g:airline_theme='tokyonight'
 let g:tokyonight_style = 'storm'
 let g:tokyonight_enable_italic = 1
-let g:tokyonight_transparent_background = 1
+let g:tokyonight_transparent_background = 0
 
 colorscheme tokyonight
 
@@ -69,6 +69,7 @@ map <A-1> :NERDTreeToggle<CR>
 map <A-3> :Commits<CR>
 map <A-w> :GitFiles<CR>
 map <A-q> :Files<CR>
+map <A-e> :Rg<CR>
 map <A-r> :CargoRun<CR>
 map <A-t> :CargoTest<CR>
 

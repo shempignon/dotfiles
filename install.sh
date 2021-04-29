@@ -4,7 +4,7 @@ set -eu
 
 printf '\n'
 
-REQUIRED_PACKAGES=("alacritty" "bat" "curl" "diskonaut" "dunst" "exa" "feh" "fish" "font-victor-mono" "leftwm" "nodejs" "npm" "neovim" "noto-fonts" "noto-fonts-emoji" "noto-fonts-cjk" "noto-fonts-extra" "picom" "polybar" "rofi" "starship" "ttf-fira-code" "xkb-qwerty-fr" "yarn")
+REQUIRED_PACKAGES=("alacritty" "bat" "curl" "diskonaut" "dunst" "exa" "feh" "fish" "font-victor-mono" "leftwm" "nodejs" "npm" "neovim" "noto-fonts" "noto-fonts-emoji" "noto-fonts-cjk" "noto-fonts-extra" "picom" "polybar" "rofi" "starship" "ttf-fira-code" "xclip" "xsel" "xkb-qwerty-fr" "yarn")
 PARU_REPO="https://aur.archlinux.org/paru.git"
 SCRIPT_PATH="$(dirname $(realpath $0))"
 BOLD="$(tput bold 2>/dev/null || printf '')"
@@ -133,7 +133,7 @@ install_leftwm_theme () {
 
 install_nvim_plugings () {
    run_cmd "nvim +PlugInstall +qa"
-   run_cmd "nvim +CocInstall coc-rls coc-git coc-tsserver coc-eslint coc-prettier +qa"
+   run_cmd "nvim +CocInstall coc-rls coc-git coc-tsserver coc-eslint coc-prettier coc-yaml +qa"
 }
 
 install_pacman_hooks () {
