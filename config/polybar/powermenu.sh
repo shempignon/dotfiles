@@ -5,11 +5,11 @@ uptime=$(uptime -p | sed -e 's/up //g')
 rofi_command="rofi -theme powermenu"
 
 # Options
-shutdown=" Shutdown"
-reboot=" Restart"
-lock=" Lock"
-suspend=" Sleep"
-logout=" Logout"
+shutdown="Shutdown"
+reboot="Restart"
+lock="Lock"
+suspend="Sleep"
+logout="Logout"
 
 # Confirmation
 confirm_exit() {
@@ -17,7 +17,7 @@ confirm_exit() {
 		-i\
 		-no-fixed-num-lines\
 		-p "Are You Sure? : "\
-		-theme confirconfirm
+		-theme confirm
 }
 
 # Message
