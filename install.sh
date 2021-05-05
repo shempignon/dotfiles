@@ -116,6 +116,17 @@ install_packages () {
   run_cmd "$cmd"
 }
 
+install_fonts () {
+  info "Installing fonts..."
+  FONTS_DIR="$HOME/.local/share/fonts"
+	if [[ -d "$FONTS_DIR" ]]; then
+	else
+		mkdir -p "$FONTS_DIR"
+	fi
+	cmd="cp -rf ${SCRIPT_PATH}/fonts/* ${FONTS_DIR}"
+  run_cmd "$cmd"
+}
+
 install_vim_plug () {
   info 'Installing vim-plug...'
   run_cmd "curl --fail --location --output ${HOME}/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
@@ -149,6 +160,7 @@ check_if_arch
 install_rust
 install_paru
 install_packages
+install_fonts
 install_vim_plug
 copy_configs
 install_leftwm_theme
