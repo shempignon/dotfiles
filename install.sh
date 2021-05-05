@@ -4,7 +4,7 @@ set -eu
 
 printf '\n'
 
-REQUIRED_PACKAGES=("alacritty" "bat" "curl" "diskonaut" "dunst" "exa" "feh" "fish" "font-victor-mono" "i3-gaps" "i3lock" "i3blocks" "nodejs" "npm" "neovim" "noto-fonts" "noto-fonts-emoji" "noto-fonts-cjk" "noto-fonts-extra" "picom" "polybar" "rofi" "starship" "ttf-fira-code" "xclip" "xsel" "xkb-qwerty-fr" "yarn")
+REQUIRED_PACKAGES=("alacritty" "bat" "curl" "dex" "diskonaut" "dunst" "exa" "feh" "fish" "font-victor-mono" "i3-gaps" "i3lock" "i3blocks" "nodejs" "npm" "neovim" "noto-fonts" "noto-fonts-emoji" "noto-fonts-cjk" "noto-fonts-extra" "picom" "polybar" "rofi" "starship" "ttf-fira-code" "xclip" "xsel" "xkb-qwerty-fr" "yarn")
 PARU_REPO="https://aur.archlinux.org/paru.git"
 SCRIPT_PATH="$(dirname $(realpath $0))"
 BOLD="$(tput bold 2>/dev/null || printf '')"
@@ -119,11 +119,9 @@ install_packages () {
 install_fonts () {
   info "Installing fonts..."
   FONTS_DIR="$HOME/.local/share/fonts"
-	if [[ -d "$FONTS_DIR" ]]; then
-	else
-		mkdir -p "$FONTS_DIR"
-	fi
-	cmd="cp -rf ${SCRIPT_PATH}/fonts/* ${FONTS_DIR}"
+  cmd="mkdir -p ${FONTS_DIR}"
+  run_cmd "$cmd"
+  cmd="cp -rf ${SCRIPT_PATH}/fonts/* ${FONTS_DIR}"
   run_cmd "$cmd"
 }
 
@@ -136,10 +134,6 @@ copy_configs () {
   run_cmd "mkdir --parents ${HOME}/.config"
   run_cmd "cp --archive ${SCRIPT_PATH}/config/. ${HOME}/.config"
   run_cmd "cp ${SCRIPT_PATH}/.xprofile ${HOME}/.xprofile"
-}
-
-install_leftwm_theme () {
-  run_cmd "ln -sf ${HOME}/.config/leftwm/themes/Own ${HOME}/.config/leftwm/themes/current"
 }
 
 install_nvim_plugings () {
@@ -163,7 +157,6 @@ install_packages
 install_fonts
 install_vim_plug
 copy_configs
-install_leftwm_theme
 install_nvim_plugings
 install_pacman_hooks
 change_shell
