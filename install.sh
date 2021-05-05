@@ -4,7 +4,7 @@ set -eu
 
 printf '\n'
 
-REQUIRED_PACKAGES=("alacritty" "bat" "curl" "dex" "diskonaut" "dunst" "exa" "feh" "fish" "font-victor-mono" "i3-gaps" "i3lock" "i3blocks" "nodejs" "npm" "neovim" "noto-fonts" "noto-fonts-emoji" "noto-fonts-cjk" "noto-fonts-extra" "picom" "polybar" "rofi" "starship" "ttf-fira-code" "xclip" "xsel" "xkb-qwerty-fr" "yarn")
+REQUIRED_PACKAGES=("alacritty" "bat" "curl" "dex" "diskonaut" "dunst" "exa" "feh" "fish" "font-victor-mono" "fzf" "i3-gaps" "i3lock" "i3blocks" "nodejs" "npm" "neovim" "noto-fonts" "noto-fonts-emoji" "noto-fonts-cjk" "noto-fonts-extra" "picom" "polybar" "rofi" "starship" "ttf-fira-code" "xclip" "xsel" "xkb-qwerty-fr" "yarn")
 PARU_REPO="https://aur.archlinux.org/paru.git"
 SCRIPT_PATH="$(dirname $(realpath $0))"
 BOLD="$(tput bold 2>/dev/null || printf '')"
