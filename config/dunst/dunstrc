@@ -82,7 +82,7 @@
     # Set to 0 to disable.
     # A client can set the 'transient' hint to bypass this. See the rules
     # section for how to disable this if necessary
-    idle_threshold = 120
+    idle_threshold = 10
 
     ### Text ###
 
@@ -206,7 +206,7 @@
     # Print a notification on startup.
     # This is mainly for error detection, since dbus (re-)starts dunst
     # automatically after a crash.
-    startup_notification = true
+    startup_notification = false
 
     # Manage dunst's desire for talking
     # Can be one of the following values:
