@@ -47,7 +47,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+f exec firefox
 bindsym $mod+a exec pcmanfm
 
@@ -63,6 +63,7 @@ assign [class="code"] 2
 assign [class="Alacritty"] 3
 assign [class="Slack"] 4
 assign [class="discord"] 4
+assign [class="Ferdi"] 4
 assign [class="steam"] 5
 assign [class="Wow.exe"] 5
 
@@ -73,7 +74,7 @@ bindsym $mod+Shift+l exec i3lock
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
-bindcode $mod+40 exec "rofi -combi-modi window,drun,ssh -font 'Fira Code 12' -show combi -icon-theme 'Adwaita' -show-icons -theme slate"
+bindcode $mod+40 exec "rofi -combi-modi window,drun,ssh -font 'Iosevka 12' -show combi -icon-theme 'Adwaita' -show-icons -theme slate"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
@@ -187,4 +188,4 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 for_window [class=".*"] border pixel 0
-gaps inner 20
+gaps inner 14
