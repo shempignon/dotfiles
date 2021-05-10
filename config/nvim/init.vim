@@ -69,8 +69,8 @@ map <A-1> :NERDTreeToggle<CR>
 map <A-3> :Commits<CR>
 map <A-w> :GitFiles<CR>
 map <A-q> :Files<CR>
+map <A-r> :Rg<CR>
 map <A-e> :Rg<CR>
-map <A-r> :CargoRun<CR>
 map <A-t> :CargoTest<CR>
 
 nmap <silent> gd <Plug>(coc-definition)
