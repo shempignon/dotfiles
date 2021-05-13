@@ -5,6 +5,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 Plug 'cespare/vim-toml'
 Plug 'preservim/nerdtree'
 Plug '907th/vim-auto-save'
@@ -78,6 +79,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> ga <Plug>(coc-codeaction)
+nmap <silent> ge <Plug>(coc-diagnostic-next)
+nmap <silent> gp <Plug>(coc-diagnostic-prev)
 nmap <leader>ev :vsp $MYVIMRC<CR>
 nmap <leader>sv :source $MYVIMRC<CR>
 nmap <leader>t :vsp term://fish<CR>
