@@ -16,6 +16,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'puremourning/vimspector'
 call plug#end()
 
 if (has('nvim'))
@@ -51,14 +52,18 @@ set undofile
 set incsearch
 set completeopt=menuone,preview,noinsert
 set wrap
+set scrolloff=7
 set guicursor=
 
+let g:airline_powerline_fonts = 1
 let g:airline_theme='tokyonight'
 let g:tokyonight_style = 'storm'
 let g:tokyonight_enable_italic = 1
-let g:tokyonight_transparent_background = 0
+let g:tokyonight_transparent_background = 1
 
 colorscheme tokyonight
+
+let g:vimspector_enable_mappings = 'HUMAN'
 
 let g:auto_save = 1
 
@@ -79,6 +84,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> ga <Plug>(coc-codeaction)
+nmap <silent> gn <Plug>(coc-rename)
 nmap <silent> ge <Plug>(coc-diagnostic-next)
 nmap <silent> gp <Plug>(coc-diagnostic-prev)
 nmap <leader>ev :vsp $MYVIMRC<CR>
@@ -87,3 +93,4 @@ nmap <leader>t :vsp term://fish<CR>
 tnoremap <Esc> <C-\><C-n><CR>
 
 autocmd TermOpen * startinsert
+

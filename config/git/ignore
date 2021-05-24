@@ -1,4 +1,5 @@
 *.swp
+.vimspector.json
 /.idea/
 /.vscode/
 /node_modules/

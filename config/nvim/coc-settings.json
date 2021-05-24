@@ -1,3 +1,4 @@
 {
     "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "rust", "typescript", "yaml"],
+    "rust-analyzer.server.path": "/usr/bin/rust-analyzer"
 }
