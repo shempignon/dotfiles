@@ -138,7 +138,7 @@ copy_configs () {
 
 install_nvim_plugings () {
    run_cmd "nvim +PlugInstall +qa"
-   run_cmd "nvim +CocInstall coc-rust-analyzer coc-git coc-tsserver coc-eslint coc-prettier coc-yaml +qa"
+   run_cmd "nvim +CocInstall coc-rust-analyzer coc-git coc-tsserver coc-eslint coc-prettier coc-yaml coc-sql +qa"
 }
 
 install_pacman_hooks () {
