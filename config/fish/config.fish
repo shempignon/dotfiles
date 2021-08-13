@@ -2,6 +2,7 @@ set -gx EDITOR nvim
 set -gx TERMINAL alacritty
 set -gx LC_CTYPE en_US.UTF-8
 set -gx LC_ALL en_US.UTF-8
+set -gx _JAVA_AWT_WM_NONREPARENTING 1
 
 set -U fish_greeting
 
