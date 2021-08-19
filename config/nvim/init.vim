@@ -16,7 +16,6 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'puremourning/vimspector'
 call plug#end()
 
 if (has('nvim'))
