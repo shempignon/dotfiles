@@ -46,8 +46,8 @@ workspace 5 output DP-1
 
 assign [class="brave"] 1
 assign [class="firefox"] 1
-assign [class="WebStorm"] 2
-assign [class="PhpStorm"] 2
+assign [class="webstorm"] 2
+assign [class="phpstorm"] 2
 assign [class="code"] 2
 assign [class="Alacritty"] 3
 assign [class="Slack"] 4

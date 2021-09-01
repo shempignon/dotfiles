@@ -28,13 +28,13 @@ workspace 5 output DP-1
 
 assign [class="firefox"] 1
 assign [class="brave"] 1
-assign [class="WebStorm"] 2
-assign [class="PhpStorm"] 2
+assign [class="webstorm"] 2
+assign [class="phpstorm"] 2
 assign [class="code"] 2
-assign [class="Alacritty"] 3
-assign [class="Slack"] 4
+assign [class="alacritty"] 3
+assign [class="slack"] 4
 assign [class="discord"] 4
-assign [class="Ferdi"] 4
+assign [class="ferdi"] 4
 assign [class="steam"] 5
 assign [class="Wow.exe"] 5
 ### Key bindings

@@ -26,14 +26,17 @@ REQUIRED_PACKAGES=("alacritty"
 "noto-fonts-cjk"
 "noto-fonts-extra"
 "otf-font-awesome"
+"pavucontrol"
+"pcmanfm"
+"pipewire"
+"pipewire-pulse"
 "polybar"
 "rofi"
 "rust-analyzer"
 "starship"
-"sway"
 "ttc-iosevka"
 "ttf-fira-code"
-"waybar"
+"wofi"
 "xclip"
 "xsel"
 "xkb-qwerty-fr"
@@ -133,6 +136,10 @@ install_paru () {
   run_cmd "makepkg --syncdeps --install --noconfirm --noprogressbar"
 }
 
+populate_keys() {
+  run_cmd "sudo pacman-key --populate archlinux"
+}
+
 install_rust() {
   if has cargo; then
     return 0
@@ -184,6 +191,7 @@ change_shell () {
 }
 
 check_if_arch
+populate_keys
 install_rust
 install_paru
 install_packages
