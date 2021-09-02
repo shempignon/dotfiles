@@ -13,15 +13,16 @@ font pango:"Victor Mono" 12
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i ~/.config/lock.png
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 exec --no-startup-id dunst
+exec --no-startup-id picom --config ~/.config/picom.conf
 exec dex -ae i3
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh --material
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh --material
 exec_always "feh --bg-scale ${HOME}/.config/background.jpg"
 
 # Use pactl to adjust volume in PulseAudio.
@@ -39,13 +40,13 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+f exec firefox
 bindsym $mod+a exec pcmanfm
 
-workspace 1 output DP-2
-workspace 4 output DP-2
+workspace 1 output HDMI-1
+workspace 4 output HDMI-1
 workspace 2 output DP-1
 workspace 5 output DP-1
 
 assign [class="brave"] 1
-assign [class="firefox"] 1
+assign [class="Firefox"] 1
 assign [class="webstorm"] 2
 assign [class="phpstorm"] 2
 assign [class="code"] 2
@@ -58,12 +59,12 @@ assign [class="Wow.exe"] 5
 
 # kill focused window
 bindsym $mod+Shift+q kill
-bindsym $mod+Shift+l exec i3lock
+bindsym $mod+Shift+l exec i3lock -i ~/.config/lock.png
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
-bindcode $mod+40 exec "rofi -combi-modi window,drun,ssh -font 'Iosevka 12' -show combi -icon-theme 'Adwaita' -show-icons -theme slate"
+bindcode $mod+40 exec "rofi -combi-modi drun,ssh -font 'Iosevka 12' -show combi -icon-theme 'Adwaita' -show-icons -theme sidebar"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
@@ -178,3 +179,19 @@ bindsym $mod+r mode "resize"
 
 for_window [class=".*"] border pixel 0
 gaps inner 14
+
+bar {
+    status_command    i3status-rs
+    position          top
+    tray_output       DP-1
+    font pango:DejaVu Sans Mono, FontAwesome 12
+    colors {
+        separator #666666
+        background #222222
+        statusline #dddddd
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #ffffff
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace #2f343a #900000 #ffffff
+    }
+}
