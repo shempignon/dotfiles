@@ -13,6 +13,7 @@ REQUIRED_PACKAGES=("alacritty"
 "exa"
 "feh"
 "fish"
+"fnm"
 "font-victor-mono"
 "fzf"
 "i3-gaps"
@@ -177,6 +178,10 @@ copy_configs () {
   run_cmd "cp ${SCRIPT_PATH}/.xprofile ${HOME}/.xprofile"
 }
 
+install_nodejs () {
+  run_cmd "fnm install 16"
+}
+
 install_nvim_plugings () {
    run_cmd "nvim +PlugInstall +qa"
    run_cmd "nvim +CocInstall coc-rust-analyzer coc-git coc-tsserver coc-eslint coc-prettier coc-yaml coc-html coc-sql coc-json coc-sh coc-toml +qa"
@@ -199,6 +204,7 @@ install_packages
 install_fonts
 install_vim_plug
 copy_configs
+install_nodejs
 install_nvim_plugings
 install_pacman_hooks
 change_shell
