@@ -39,6 +39,11 @@ interface_name_include = []
 block = "uptime"
 
 [[block]]
+block = "battery"
+interval = 10
+format = "{percentage} {time}"
+
+[[block]]
 block = "sound"
 on_click = "pavucontrol"
 max_vol = 100
