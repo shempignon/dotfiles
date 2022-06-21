@@ -54,8 +54,6 @@ disabled=true
 disabled=true
 [kotlin]
 disabled=true
-[nodejs]
-disabled=true
 [ocaml]
 disabled=true
 [perl]
@@ -86,3 +84,4 @@ disabled=true
 disabled=true
 [lua]
 disabled=true
+
