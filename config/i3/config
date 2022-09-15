@@ -24,6 +24,7 @@ font pango:monospace 8
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id picom --backend glx --config ~/.config/picom.conf
 exec --no-startup-id polkit-dumb-agent
+exec --no-startup-id /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -182,9 +183,11 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+	tray_output	DisplayPort-2
         status_command  i3status-rs
 	position	top
-	font pango:Iosevka, DejaVu Sans Mono 16
+	font		pango:Iosevka, DejaVu Sans Mono 14
+	height		30
 }
 
 for_window [class=".*"] border pixel 0

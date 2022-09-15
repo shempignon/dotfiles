@@ -5,10 +5,9 @@ memory_mem = "🐘"
 net_wired = "🌍"
 music = "📻"
 time = "📅"
-uptime = "🏭"
 
 [icons]
-name = "awesome5"
+name = "material"
 
 [[block]]
 block = "focused_window"
@@ -19,11 +18,6 @@ show_marks = "visible"
 block = "sound"
 on_click = "pavucontrol"
 max_vol = 100
-
-[[block]]
-block = "battery"
-interval = 10
-format = "{percentage} {time}"
 
 [[block]]
 block = "uptime"
