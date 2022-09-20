@@ -1,9 +1,0 @@
-[Trigger]
-Operation = Upgrade
-Type = Package
-Target = *
-
-[Action]
-Description = Try to update the Rust Toolchain on pacman syncs
-When = PostTransaction
-Exec = /usr/bin/rustup update

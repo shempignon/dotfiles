@@ -4,38 +4,59 @@ set -eu
 
 printf '\n'
 
-REQUIRED_PACKAGES=(
+COMMON_REQUIRED_PACKAGES=(
 "bat"
 "curl"
-"dex"
+"deluge-gtk"
+"docker"
+"docker-compose"
 "exa"
-"feh"
+"firefox"
 "fish"
 "fnm"
 "fzf"
-"i3-gaps"
-"i3lock"
-"i3status-rust"
+"gwenview"
+"jetbrains-toolbox"
+"keepassxc"
 "neovim"
+"nfs-utils"
 "noto-fonts"
 "noto-fonts-emoji"
 "noto-fonts-cjk"
 "noto-fonts-extra"
-"otf-font-awesome"
-"pavucontrol"
-"picom"
 "pipewire"
-"pipewire-pulse"
-"rofi"
 "rust-analyzer"
+"spectacle"
 "starship"
-"thunar"
 "ttc-iosevka"
+"vlc"
 "wezterm"
 "xclip"
 "xsel"
 "xkb-qwerty-fr"
 )
+
+I3_REQUIREMENTS=(
+"dex"
+"feh"
+"i3-gaps"
+"i3lock"
+"i3status-rust"
+"otf-font-awesome"
+"pavucontrol"
+"picom"
+"rofi"
+"thunar"
+)
+
+KDE_REQUIREMENTS=(
+"ark"
+"dolphin"
+"dolphin-plugins"
+"ffmpegthumbs"
+"plasma"
+)
+
 PARU_REPO="https://aur.archlinux.org/paru.git"
 SCRIPT_PATH="$(dirname $(realpath $0))"
 BOLD="$(tput bold 2>/dev/null || printf '')"
@@ -94,7 +115,6 @@ get_tmpfile() {
 }
 
 run_cmd () {
-  cmd=$
   $1 && return 0 || rc=$?
 
   error "Command failed (exit code $rc): ${BLUE}${1}${NO_COLOR}"
@@ -109,6 +129,13 @@ check_if_arch () {
   fi
 
   elevate_priv
+  configure_pacman
+}
+
+configure_pacman() {
+  info "Configuring pacman..."
+  sudo sed -i "s?^#ParallelDownloads?ParallelDownloads?" /etc/pacman.conf
+  run_cmd "sudo pacman-key --populate archlinux"
 }
 
 install_paru () {
@@ -118,7 +145,7 @@ install_paru () {
 
   if ! has makepkg; then
     info $'Could not find "makepkg" command. Let\'s install it!'
-    base_devel_install_cmd='sudo pacman -Sy base-devel'
+    base_devel_install_cmd='sudo pacman --sync --refresh --noconfirm --noprogressbar base-devel'
     run_cmd $base_devel_install_cmd
   fi
 
@@ -129,10 +156,6 @@ install_paru () {
   run_cmd "git clone ${PARU_REPO}"
   run_cmd "cd paru"
   run_cmd "makepkg --syncdeps --install --noconfirm --noprogressbar"
-}
-
-populate_keys() {
-  run_cmd "sudo pacman-key --populate archlinux"
 }
 
 install_rust() {
@@ -146,8 +169,13 @@ install_rust() {
 }
 
 install_packages () {
+  REQUIRED_PACKAGES=(
+    "${COMMON_REQUIRED_PACKAGES[@]}"
+    "${I3_REQUIREMENTS[@]}"
+    "${KDE_REQUIREMENTS[@]}"  
+  )
   info "Installing packages ${REQUIRED_PACKAGES[@]}..."
-  cmd="paru --sync --refresh --noconfirm --noprogressbar ${REQUIRED_PACKAGES[@]}"
+  cmd="paru --sync --refresh --noconfirm --noprogressbar --needed ${REQUIRED_PACKAGES[@]}"
   run_cmd "$cmd"
 }
 
@@ -171,6 +199,11 @@ copy_configs () {
   run_cmd "cp ${SCRIPT_PATH}/.xprofile ${HOME}/.xprofile"
 }
 
+install_fish_addons() {
+  fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+  fish -c "fisher install danhper/fish-ssh-agent"
+}
+
 install_nodejs () {
   run_cmd "fnm install 16"
 }
@@ -180,24 +213,18 @@ install_nvim_plugings () {
    run_cmd "nvim +CocInstall coc-rust-analyzer coc-git coc-tsserver coc-eslint coc-prettier coc-yaml coc-html coc-sql coc-json coc-sh coc-toml +qa"
 }
 
-install_pacman_hooks () {
-  run_cmd "sudo mkdir --parents /etc/pacman.d/hooks"
-  run_cmd "sudo cp --archive ${SCRIPT_PATH}/hooks/. /etc/pacman.d/hooks"
-}
-
 change_shell () {
   run_cmd "chsh -s /bin/fish"
 }
 
 check_if_arch
-populate_keys
 install_rust
 install_paru
 install_packages
 install_fonts
 install_vim_plug
 copy_configs
+install_fish_addons
 install_nodejs
 install_nvim_plugings
-install_pacman_hooks
 change_shell
