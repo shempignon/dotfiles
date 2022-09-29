@@ -1,21 +1,17 @@
 call plug#begin()
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-Plug 'cespare/vim-toml'
-Plug 'preservim/nerdtree'
 Plug '907th/vim-auto-save'
-Plug 'timonv/vim-cargo'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'nvim-lua/plenary.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'akinsho/nvim-bufferline.lua'
-Plug 'ghifarit53/tokyonight-vim'
-Plug 'leafgarland/typescript-vim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'NoahTheDuke/vim-just'
+Plug 'nvim-lualine/lualine.nvim'
 call plug#end()
 
 if (has('nvim'))
@@ -54,29 +50,17 @@ set wrap
 set scrolloff=7
 set guicursor=
 
-let g:airline_powerline_fonts = 1
-let g:airline_theme='tokyonight'
-let g:tokyonight_style = 'storm'
-let g:tokyonight_enable_italic = 1
-let g:tokyonight_transparent_background = 1
-
 colorscheme tokyonight
 
-let g:vimspector_enable_mappings = 'HUMAN'
-
 let g:auto_save = 1
+let mapleader = " "
 
-let g:mkdp_browser = 'firefox'
-
-let mapleader = ","
-
-map <A-1> :NERDTreeToggle<CR>
+map <A-1> :Neotree<CR>
+map <A-!> :NeoTreeReveal<CR>
 map <A-3> :Commits<CR>
-map <A-w> :GitFiles<CR>
-map <A-q> :Files<CR>
-map <A-r> :Rg<CR>
-map <A-e> :Rg<CR>
-map <A-t> :CargoTest<CR>
+nnoremap <A-q> <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <A-w> <cmd>lua require('telescope.builtin').git_files()<cr>
+nnoremap <leader>fr <cmd>lua require('telescope.builtin').live_grep()<cr>
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -93,3 +77,6 @@ tnoremap <Esc> <C-\><C-n><CR>
 
 autocmd TermOpen * startinsert
 
+lua << END
+require('lualine').setup()
+END
