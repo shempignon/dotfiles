@@ -1,8 +1,9 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["css", "html", "markdown", "rust","typescript", "yaml"],
+    "coc.preferences.formatOnSaveFiletypes": ["css", "lua", "html", "markdown", "rust","typescript", "yaml"],
     "rust-analyzer.server.path": "/usr/bin/rust-analyzer",
     "sql.formatOptions": {
       "language": "plsql"
     },
     "sql.database": "mysql"
 }
+
