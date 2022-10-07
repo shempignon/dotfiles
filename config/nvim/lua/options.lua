@@ -25,3 +25,4 @@ opt.wrap=true
 opt.scrolloff=7
 
 vim.cmd[[colorscheme tokyonight]]
+vim.g["auto_save"] = 1

@@ -14,15 +14,6 @@ return require('packer').startup(function(use)
       'nvim-lua/plenary.nvim',
       'kyazdani42/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
-    },
-    config = require 'neo-tree'.setup {
-      filesystem = {
-        filtered_items = {
-          visible = true,
-          hide_dotfiles = true,
-          hide_gitignored = true,
-        }
-      }
     }
   }
   use { 'neoclide/coc.nvim', branch = 'release' }
