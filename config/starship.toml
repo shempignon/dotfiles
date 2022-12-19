@@ -10,8 +10,8 @@ threshold = 25
 style = "bold yellow"
 
 [character]
-success_symbol = "[🍑](bold green)"
-error_symbol = "[🍆](bold red) "
+success_symbol = "[🦆](bold green)"
+error_symbol = "[🐞](bold red)"
 
 [directory]
 home_symbol="🦚"
