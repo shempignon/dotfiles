@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -eu
+
+printf '\n'
+
+BOLD="$(tput bold 2>/dev/null || printf '')"
+GREY="$(tput setaf 0 2>/dev/null || printf '')"
+UNDERLINE="$(tput smul 2>/dev/null || printf '')"
+RED="$(tput setaf 1 2>/dev/null || printf '')"
+GREEN="$(tput setaf 2 2>/dev/null || printf '')"
+YELLOW="$(tput setaf 3 2>/dev/null || printf '')"
+BLUE="$(tput setaf 4 2>/dev/null || printf '')"
+MAGENTA="$(tput setaf 5 2>/dev/null || printf '')"
+NO_COLOR="$(tput sgr0 2>/dev/null || printf '')"
+
+info() {
+  printf '%s\n' "${BOLD}${GREY}>${NO_COLOR} $*"
+}
+
+warn() {
+  printf '%s\n' "${YELLOW}! $*${NO_COLOR}"
+}
+
+error() {
+  printf '%s\n' "${RED}x $*${NO_COLOR}" >&2
+}
+
+has() {
+  command -v "$1" 1>/dev/null 2>&1
+}
+
+run_cmd () {
+  $1 && return 0 || rc=$?
+
+  error "Command failed (exit code $rc): ${BLUE}${1}${NO_COLOR}"
+  printf "\n" >&2
+  exit $rc
+}
+
+if ! has ansible; then
+    warn "Ansible is not installed, trying to install it"
+    if ! has pacman; then
+        error "This script is only configured to install ansible with pacman"
+        exit 127
+    fi
+    run_cmd "sudo pacman --sync --refresh --noconfirm --noprogressbar ansible"
+fi
+
+
+ansible-galaxy collection install kewlfft.aur
+
+info "Provide your user password (will be leaked to the NSA):"
+
+read -s BECOME_PASSWORD
+
+ansible-playbook --inventory ansible/hosts --extra-vars "ansible_become_password=$BECOME_PASSWORD" ansible/setup.yaml
