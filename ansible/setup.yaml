@@ -1,0 +1,147 @@
+- name: Setup l'enculé's environment
+  hosts: local
+
+  tasks:
+    - name: Set ParallelDownloads in pacman config
+      become: true
+      ansible.builtin.replace:
+        path: /etc/pacman.conf
+        regexp: '^#ParallelDownloads = \d+'
+        replace: 'ParallelDownloads = 10'
+        mode: 0644
+      when: ansible_facts['distribution'] == 'Archlinux'
+
+    - name: Register has_paru
+      ansible.builtin.command: pacman -Q paru
+      register: has_paru
+      ignore_errors: true
+      changed_when: has_paru.rc != 0
+      when: ansible_facts['distribution'] == 'Archlinux'
+
+    - name: Create the `aur_builder` user
+      become: true
+      ansible.builtin.user:
+        name: aur_builder
+        create_home: true
+        group: wheel
+      when: ansible_facts['distribution'] == 'Archlinux' and has_paru is failed
+
+    - name: Allow the `aur_builder` user to run `sudo pacman` without a password
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/11-install-aur_builder
+        line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+        create: true
+        validate: "visudo -cf %s"
+        mode: 0440
+      when: ansible_facts['distribution'] == 'Archlinux' and has_paru is failed
+
+    - name: Install paru using makepkg if it isn't installed already
+      kewlfft.aur.aur:
+        name: paru
+        use: makepkg
+        state: present
+      become: true
+      become_user: aur_builder
+      when: ansible_facts['distribution'] == 'Archlinux' and has_paru is failed
+
+    - name: Remove the `aur_builder` user
+      become: true
+      ansible.builtin.user:
+        name: aur_builder
+        remove: true
+        state: absent
+
+    - name: Install packages
+      kewlfft.aur.aur:
+        use: paru
+        state: present
+        name:
+          - ark
+          - bat
+          - curl
+          - deluge-gtk
+          - dex
+          - docker
+          - docker-compose
+          - dolphin
+          - dolphin-plugins
+          - exa
+          - feh
+          - ffmpegthumbs
+          - firefox
+          - fish
+          - fisher
+          - fnm-bin
+          - fzf
+          - gwenview
+          - i3-gaps
+          - i3lock
+          - i3status-rust
+          - keepassxc
+          - neovim
+          - nextcloud-client
+          - nfs-utils
+          - noto-fonts
+          - noto-fonts-emoji
+          - noto-fonts-cjk
+          - noto-fonts-extra
+          - openssh
+          - pavucontrol
+          - picom
+          - pipewire
+          - plasma
+          - ripgrep
+          - rofi
+          - rust-analyzer
+          - spectacle
+          - starship
+          - thunar
+          - ttc-iosevka
+          - vlc
+          - wezterm
+          - xclip
+          - xsel
+          - xkb-qwerty-fr
+
+    - name: Copy configs
+      ansible.builtin.copy:
+        src: ../config/.
+        dest: $HOME/.config
+        follow: true
+        mode: 0644
+  
+    - name: Copy fonts
+      ansible.builtin.copy:
+        src: ../fonts/
+        dest: $HOME/.local/share/fonts
+        follow: true
+        mode: 0644
+
+    - name: Install fish-ssh-agent
+      ansible.builtin.command: fish -c "fisher install danhper/fish-ssh-agent"
+      register: fish_ssh_agent
+      changed_when: fish_ssh_agent.rc != 0
+
+    - name: Enable sddm service
+      become: true
+      ansible.builtin.systemd:
+        name: sddm.service
+        enabled: true
+
+    - name: Enable bluetooth service
+      become: true
+      ansible.builtin.systemd:
+        name: bluetooth.service
+        enabled: true
+
+    - name: Register user_shell
+      ansible.builtin.shell: grep $USER /etc/passwd
+      register: user_shell
+      changed_when: user_shell.rc != 0
+
+    - name: Change shell
+      ansible.builtin.shell:
+        cmd: chsh --shell $(command -v fish)
+        stdin: "{{ ansible_become_password }}"
+      when: user_shell.stdout is not regex("fish$")
