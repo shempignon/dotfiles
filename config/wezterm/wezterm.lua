@@ -1,6 +1,10 @@
 local wezterm = require 'wezterm';
 
 return {
+	keys = { {
+		key = 'F11',
+		action = wezterm.action.ToggleFullScreen,
+	} },
 	font = wezterm.font('Iosevka Nerd Font'),
 	font_size = 16.0,
 	default_cursor_style = "BlinkingBar",

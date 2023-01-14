@@ -34,6 +34,10 @@ format="[$all_status$ahead_behind]($style) "
 format="[$branch]($style) "
 style="bold bright-purple"
 
+[docker_context]
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'compose.yaml', 'compose.yml', 'Containerfile', 'Dockerfile']
+
+
 [package]
 disabled=true
 [dart]
