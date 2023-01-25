@@ -91,13 +91,14 @@
           - picom
           - pipewire
           - plasma
+          - pyenv
           - ripgrep
           - rofi
           - rust-analyzer
           - spectacle
           - starship
           - thunar
-          - ttc-iosevka
+          - ttf-iosevka-nerd
           - vlc
           - wezterm
           - xclip

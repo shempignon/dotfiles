@@ -18,3 +18,4 @@ alias vpn="ssh -TND 4711 blanc"
 
 starship init fish | source
 fnm env --use-on-cd | source
+pyenv init - | source
