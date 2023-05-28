@@ -6,8 +6,8 @@ set $right l
 set $term wezterm
 set $menu wofi -I --show drun | xargs swaymsg exec -- 
 
-output DP-1 pos 0 0 res 2560x1440
-output DP-2 pos 2560 0 res 1920x1080
+output DP-3 pos 0 0 res 2560x1440
+output DP-1 pos 2560 0 res 2560x1440
 output * bg ~/.config/background.jpg fill
 
 input "type:keyboard" {
@@ -41,7 +41,7 @@ assign [class="Wow.exe"] 5
     bindsym $mod+Return exec $term
     bindsym $mod+Shift+q kill
     bindsym $mod+d exec $menu
-    bindsym $mod+a exec pcmanfm
+    bindsym $mod+a exec dolphin
     bindsym $mod+f exec firefox
 
     bindsym $mod+escape exec swaylock

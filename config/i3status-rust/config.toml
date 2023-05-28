@@ -1,28 +1,29 @@
+[theme]
 theme = "nord-dark"
-[icons.overrides]
-cpu = "🔥"
-memory_mem = "🐘"
-net_wired = "🌍"
-music = "📻"
-time = "📅"
 
 [icons]
-name = "material"
+icons = "material"
+[icons.overrides]
+cpu = "🔥"
+time = "📅"
+gpu = "💫"
 
 [[block]]
 block = "focused_window"
-max_width = 50
-show_marks = "visible"
+
+[[block]]
+block = "cpu"
 
 [[block]]
 block = "sound"
-on_click = "pavucontrol"
-max_vol = 100
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
 
 [[block]]
-block = "uptime"
+block = "amd_gpu"
 
 [[block]]
 block = "time"
 interval = 5
-format = "%d/%m %R"
+format = " $icon $timestamp.datetime(f:'%d/%m %R') "
