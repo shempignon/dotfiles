@@ -186,7 +186,7 @@ bar {
 	tray_output	DisplayPort-2
 	tray_padding	4px
 	status_command  i3status-rs
-	position	bottom
+	position	top
 	font		pango:Iosevka Nerd Font 14
 	height		30
 	colors 	{
@@ -199,7 +199,7 @@ bar {
 }
 
 for_window [class=".*"] border pixel 0
-gaps inner 14
+gaps inner 12
 
 assign [class="firefox"] 1
 assign [class="jetbrains-webstorm"] 2

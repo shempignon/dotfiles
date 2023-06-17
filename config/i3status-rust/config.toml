@@ -7,6 +7,8 @@ icons = "material"
 cpu = "🔥"
 time = "📅"
 gpu = "💫"
+phone = "📱"
+
 
 [[block]]
 block = "focused_window"
@@ -24,6 +26,29 @@ cmd = "pavucontrol"
 block = "amd_gpu"
 
 [[block]]
+block = "kdeconnect"
+bat_info = 0
+bat_warning = 0
+bat_critical = 0
+bat_good = 0
+format = " $icon $bat_charge "
+[[block.click]]
+button = "left"
+cmd = "kdeconnect-app"
+
+[[block]]
 block = "time"
 interval = 5
 format = " $icon $timestamp.datetime(f:'%d/%m %R') "
+
+[[block]]
+block = "menu"
+text = " \uf011  "
+[[block.items]]
+display = " -&gt; Power Off &lt;-"
+cmd = "poweroff"
+confirm_msg = "Are you sure you want to power off?"
+[[block.items]]
+display = " -&gt;  Reboot   &lt;-"
+cmd = "reboot"
+confirm_msg = "Are you sure you want to reboot?"
