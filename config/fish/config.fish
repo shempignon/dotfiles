@@ -20,4 +20,3 @@ alias dup="docker compose up --detach --remove-orphans"
 alias dwn="docker compose down --remove-orphans"
 
 starship init fish | source
-pyenv init - | source
