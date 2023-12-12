@@ -61,13 +61,11 @@
           - bat
           - curl
           - deluge-gtk
-          - dex
           - docker
           - docker-compose
           - dolphin
           - dolphin-plugins
           - exa
-          - feh
           - ffmpegthumbs
           - firefox
           - fish
@@ -75,9 +73,6 @@
           - fnm-bin
           - fzf
           - gwenview
-          - i3-wm
-          - i3lock
-          - i3status-rust
           - keepassxc
           - neovim
           - nextcloud-client
@@ -87,20 +82,20 @@
           - noto-fonts-cjk
           - noto-fonts-extra
           - openssh
-          - pavucontrol
-          - picom
           - pipewire
+          - pipewire-pulse
           - plasma
           - pyenv
           - ripgrep
-          - rofi
           - rust-analyzer
           - spectacle
           - starship
-          - thunar
+          - tree-sitter-cli
           - ttf-iosevka-nerd
+          - ttf-victor-mono
           - vlc
           - wezterm
+          - wireplumber
           - xclip
           - xsel
           - xkb-qwerty-fr
