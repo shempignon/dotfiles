@@ -40,7 +40,10 @@ return {
     "stevearc/dressing.nvim",
     opts = {},
   },
-  "lewis6991/gitsigns.nvim",
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function() require("gitsigns").setup() end,
+  },
   "folke/which-key.nvim",
   { "folke/neoconf.nvim", cmd = "Neoconf" },
   "folke/neodev.nvim",
@@ -56,7 +59,19 @@ return {
     "williamboman/mason.nvim",
     config = function () require("mason").setup() end,
   },
-  "williamboman/mason-lspconfig.nvim",
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function () 
+      require("mason-lspconfig").setup{
+        ensure_installed = { "lua_ls", "rust_analyzer", "tsserver" },
+      };
+      require("mason-lspconfig").setup_handlers {
+        function (server_name)
+          require("lspconfig")[server_name].setup {}
+        end,
+      };
+    end,
+  },
   "neovim/nvim-lspconfig",
   {
     "nvim-treesitter/nvim-treesitter",
@@ -95,4 +110,7 @@ return {
   "EdenEast/nightfox.nvim",
   "folke/tokyonight.nvim",
   "Pocco81/auto-save.nvim",
+  "oxfist/night-owl.nvim",
+  "Rigellute/shades-of-purple.vim",
+  "yeddaif/neovim-purple",
 }
