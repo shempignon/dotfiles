@@ -13,6 +13,14 @@ return {
         width = 60,
         position = "right",
       },
+      filesystem = {
+        filtered_items = {
+          visible = true,
+        },
+        follow_current_file = {
+          enabled = true,
+        },
+      },
     } end,
     keys = {
       {
@@ -61,7 +69,7 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    config = function () 
+    config = function ()
       require("mason-lspconfig").setup{
         ensure_installed = { "lua_ls", "rust_analyzer", "tsserver" },
       };
@@ -88,7 +96,10 @@ return {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function () require("telescope").setup() end,
+    config = function ()
+      require("telescope").setup() 
+      require("telescope").load_extension("aerial")
+    end,
     keys = {
       {
         "<leader><leader>",
@@ -96,15 +107,30 @@ return {
         desc = "Find files (git)"
       },
       {
-        "<leader>fg",
+        "<leader>g",
         function() require("telescope.builtin").live_grep() end,
         desc = "Live grep"
       },
       {
-        "<leader>ff",
+        "<leader>w",
         function() require("telescope.builtin").find_files() end,
         desc = "Find files"
       },
+      {
+        "<leader>ff",
+        function()
+          require("telescope").extensions.aerial.aerial()
+        end,
+        desc = "Show file navigation",
+      },
+    },
+  },
+  {
+    'stevearc/aerial.nvim',
+    opts = {},
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
     },
   },
   "EdenEast/nightfox.nvim",

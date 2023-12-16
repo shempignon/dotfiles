@@ -10,5 +10,5 @@ return {
 	line_height = 1.1,
 	default_cursor_style = "BlinkingBar",
 	hide_tab_bar_if_only_one_tab = true,
-	color_scheme = "Tokyo Night Storm",
+	color_scheme = "Tokyo Night Moon",
 }
