@@ -50,22 +50,16 @@ return {
   },
   {
     "lewis6991/gitsigns.nvim",
-    config = function() require("gitsigns").setup() end,
+    opts = {},
   },
   "folke/which-key.nvim",
-  { "folke/neoconf.nvim", cmd = "Neoconf" },
-  "folke/neodev.nvim",
   {
     "nvim-lualine/lualine.nvim",
-    config = function () require("lualine").setup {
-      options = {
-        theme = "tokyonight",
-      },
-    } end,
+    opts = {},
   },
   {
     "williamboman/mason.nvim",
-    config = function () require("mason").setup() end,
+    opts = {},
   },
   {
     "williamboman/mason-lspconfig.nvim",
@@ -97,7 +91,7 @@ return {
     branch = "0.1.x",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function ()
-      require("telescope").setup() 
+      require("telescope").setup()
       require("telescope").load_extension("aerial")
     end,
     keys = {
@@ -126,12 +120,21 @@ return {
     },
   },
   {
-    'stevearc/aerial.nvim',
+    "stevearc/aerial.nvim",
     opts = {},
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons"
     },
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    opts = {},
+    keys = {{
+      "<leader>4",
+      "<cmd>ToggleTerm size=20 direction=float<cr>",
+      desc = "Toggle terminal",
+    }},
   },
   "EdenEast/nightfox.nvim",
   "folke/tokyonight.nvim",
