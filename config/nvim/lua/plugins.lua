@@ -38,7 +38,9 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      notify = { enabled = false },
+    },
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
@@ -65,7 +67,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function ()
       require("mason-lspconfig").setup{
-        ensure_installed = { "lua_ls", "rust_analyzer", "tsserver" },
+        ensure_installed = { "lua_ls", "rust_analyzer", "ts_ls", "emmet-language-server" },
       };
       require("mason-lspconfig").setup_handlers {
         function (server_name)
@@ -136,10 +138,6 @@ return {
       desc = "Toggle terminal",
     }},
   },
-  "EdenEast/nightfox.nvim",
   "folke/tokyonight.nvim",
   "Pocco81/auto-save.nvim",
-  "oxfist/night-owl.nvim",
-  "Rigellute/shades-of-purple.vim",
-  "yeddaif/neovim-purple",
 }
