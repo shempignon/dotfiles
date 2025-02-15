@@ -1,4 +1,4 @@
-- name: Setup l'enculé's environment
+- name: Setup environment
   hosts: local
 
   tasks:
@@ -62,18 +62,19 @@
           - curl
           - deluge-gtk
           - docker
+          - docker-buildx
           - docker-compose
           - dolphin
           - dolphin-plugins
-          - exa
+          - eza
           - ffmpegthumbs
           - firefox
           - fish
           - fisher
           - fnm-bin
-          - fzf
           - gwenview
           - keepassxc
+          - less
           - neovim
           - nextcloud-client
           - nfs-utils
@@ -91,28 +92,25 @@
           - spectacle
           - starship
           - tree-sitter-cli
-          - ttf-iosevka-nerd
-          - ttf-victor-mono
+          - ttf-iosevkaterm-nerd
           - vlc
           - wezterm
-          - wireplumber
-          - xclip
-          - xsel
-          - xkb-qwerty-fr
+          - wl-clipboard
 
-    - name: Copy configs
-      ansible.builtin.copy:
-        src: ../config/.
-        dest: $HOME/.config
-        follow: true
-        mode: 0644
-  
-    - name: Copy fonts
-      ansible.builtin.copy:
-        src: ../fonts/
-        dest: $HOME/.local/share/fonts
-        follow: true
-        mode: 0644
+    - name: Create directories
+      ansible.builtin.command: mkdir -p $HOME/.ssh $HOME/config
+      register: output
+      changed_when: output.rc != 0
+
+    - name: Install npm
+      ansible.builtin.command: fnm install --lts
+      register: output
+      changed_when: output.rc != 0
+
+    - name: Stow
+      ansible.builtin.command: stow --verbose --restow --target=$HOME/.config --dir=../ config
+      register: output
+      changed_when: output.rc != 0
 
     - name: Install fish-ssh-agent
       ansible.builtin.command: fish -c "fisher install danhper/fish-ssh-agent"
