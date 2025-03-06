@@ -61,6 +61,7 @@
           - bat
           - curl
           - deluge-gtk
+          - direnv
           - docker
           - docker-buildx
           - docker-compose
@@ -68,13 +69,13 @@
           - dolphin-plugins
           - eza
           - ffmpegthumbs
-          - firefox
           - fish
           - fisher
           - fnm-bin
           - gwenview
           - keepassxc
           - less
+          - librewolf-bin
           - neovim
           - nextcloud-client
           - nfs-utils
@@ -91,6 +92,7 @@
           - rust-analyzer
           - spectacle
           - starship
+          - stow
           - tree-sitter-cli
           - ttf-iosevkaterm-nerd
           - vlc

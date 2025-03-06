@@ -67,7 +67,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function ()
       require("mason-lspconfig").setup{
-        ensure_installed = { "lua_ls", "rust_analyzer", "ts_ls", "emmet-language-server" },
+        ensure_installed = { "lua_ls", "rust_analyzer", "ts_ls" },
       };
       require("mason-lspconfig").setup_handlers {
         function (server_name)
