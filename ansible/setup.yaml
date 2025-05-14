@@ -73,7 +73,6 @@
           - fisher
           - fnm-bin
           - gwenview
-          - keepassxc
           - less
           - librewolf-bin
           - neovim
@@ -90,6 +89,8 @@
           - pyenv
           - ripgrep
           - rust-analyzer
+          - s3cmd
+          - scaleway-cli
           - spectacle
           - starship
           - stow

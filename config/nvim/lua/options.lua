@@ -1,4 +1,4 @@
-vim.cmd[[colorscheme tokyonight-night]]
+vim.cmd[[colorscheme shades_of_purple]]
 
 vim.g.maplocalleader = "\\"
 

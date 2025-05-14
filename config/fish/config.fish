@@ -21,3 +21,6 @@ alias dwn="docker compose down --remove-orphans"
 
 starship init fish | source
 fnm env --use-on-cd | source
+
+# Scaleway CLI autocomplete initialization.
+eval (scw autocomplete script shell=fish)

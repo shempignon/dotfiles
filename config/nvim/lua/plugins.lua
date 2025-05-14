@@ -140,4 +140,5 @@ return {
   },
   "folke/tokyonight.nvim",
   "Pocco81/auto-save.nvim",
+  "Rigellute/shades-of-purple.vim",
 }
