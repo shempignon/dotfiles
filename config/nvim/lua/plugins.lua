@@ -64,15 +64,10 @@ return {
     opts = {},
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     config = function ()
       require("mason-lspconfig").setup{
         ensure_installed = { "lua_ls", "rust_analyzer", "ts_ls" },
-      };
-      require("mason-lspconfig").setup_handlers {
-        function (server_name)
-          require("lspconfig")[server_name].setup {}
-        end,
       };
     end,
   },
