@@ -24,7 +24,7 @@
         name: aur_builder
         create_home: true
         group: wheel
-      when: ansible_facts['distribution'] == 'Archlinux' and has_paru is failed
+      when: ansible_facts['distribution'] == 'Archlinux'
 
     - name: Allow the `aur_builder` user to run `sudo pacman` without a password
       become: true
@@ -45,20 +45,16 @@
       become_user: aur_builder
       when: ansible_facts['distribution'] == 'Archlinux' and has_paru is failed
 
-    - name: Remove the `aur_builder` user
-      become: true
-      ansible.builtin.user:
-        name: aur_builder
-        remove: true
-        state: absent
-
     - name: Install packages
+      become: yes
+      become_user: aur_builder
       kewlfft.aur.aur:
         use: paru
         state: present
         name:
           - ark
           - bat
+          - cliphist
           - curl
           - deluge-gtk
           - direnv
@@ -69,12 +65,18 @@
           - dolphin-plugins
           - eza
           - ffmpegthumbs
+          - firefox
           - fish
           - fisher
           - fnm-bin
           - gwenview
+          - hyprcursor
+          - hypridle
+          - hyprland
+          - hyprlock
+          - hyprpaper
           - less
-          - librewolf-bin
+          - mako
           - neovim
           - nextcloud-client
           - nfs-utils
@@ -86,6 +88,7 @@
           - pipewire
           - pipewire-pulse
           - plasma
+          - polkit-kde-agent
           - pyenv
           - ripgrep
           - rust-analyzer
@@ -96,9 +99,21 @@
           - stow
           - tree-sitter-cli
           - ttf-iosevkaterm-nerd
+          - uwsm
           - vlc
+          - visual-studio-code-bin
+          - waybar
           - wezterm
           - wl-clipboard
+          - wofi
+          - xdg-desktop-portal-hyprland
+
+    - name: Remove the `aur_builder` user
+      become: true
+      ansible.builtin.user:
+        name: aur_builder
+        remove: true
+        state: absent
 
     - name: Create directories
       ansible.builtin.command: mkdir -p $HOME/.ssh $HOME/config
