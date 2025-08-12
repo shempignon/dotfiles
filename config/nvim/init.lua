@@ -1,69 +1,88 @@
-vim.g.maplocalleader = " "
-vim.g.mapleader = " "
-vim.cmd[[colorscheme sorbet]]
-
-local opt = vim.opt
-
-opt.autowrite = true -- Enable auto write
-opt.clipboard = "unnamedplus" -- Sync with system clipboard
-opt.completeopt = "menu,menuone,noselect"
-opt.conceallevel = 3 -- Hide * markup for bold and italic
-opt.confirm = true -- Confirm to save changes before exiting modified buffer
-opt.cursorline = false -- Disable highlighting of the current line
-opt.expandtab = true -- Use spaces instead of tabs
-opt.formatoptions = "jcroqlnt" -- tcqj
-opt.grepformat = "%f:%l:%c:%m"
-opt.grepprg = "rg --vimgrep"
-opt.ignorecase = true -- Ignore case
-opt.inccommand = "nosplit" -- preview incremental substitute
-opt.laststatus = 3 -- global statusline
-opt.list = true -- Show some invisible characters (tabs...
-opt.mouse = "a" -- Enable mouse mode
-opt.number = true -- Print line number
-opt.pumblend = 10 -- Popup blend
-opt.pumheight = 10 -- Maximum number of entries in a popup
-opt.relativenumber = true -- Relative line numbers
-opt.scrolloff = 4 -- Lines of context
-opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
-opt.shiftround = true -- Round indent
-opt.shiftwidth = 2 -- Size of an indent
-opt.shortmess:append({ W = true, I = true, c = true, C = true })
-opt.showmode = false -- Dont show mode since we have a statusline
-opt.sidescrolloff = 8 -- Columns of context
-opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
-opt.smartcase = true -- Don't ignore case with capitals
-opt.smartindent = true -- Insert indents automatically
-opt.spelllang = { "en" }
-opt.splitbelow = true -- Put new windows below current
-opt.splitkeep = "screen"
-opt.splitright = true -- Put new windows right of current
-opt.tabstop = 2 -- Number of spaces tabs count for
-opt.termguicolors = true -- True color support
-opt.timeoutlen = 300
-opt.undofile = true
-opt.undolevels = 10000
-opt.updatetime = 200 -- Save swap file and trigger CursorHold
-opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.winminwidth = 5 -- Minimum window width
-opt.wrap = false -- Disable line wrap
-opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  -- fold = "⸱",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
-}
-
-if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
+-- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
+local path_package = vim.fn.stdpath('data') .. '/site/'
+local mini_path = path_package .. 'pack/deps/start/mini.nvim'
+if not vim.loop.fs_stat(mini_path) then
+  vim.cmd('echo "Installing `mini.nvim`" | redraw')
+  local clone_cmd = {
+    'git', 'clone', '--filter=blob:none',
+    'https://github.com/echasnovski/mini.nvim', mini_path
+  }
+  vim.fn.system(clone_cmd)
+  vim.cmd('packadd mini.nvim | helptags ALL')
+  vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 
--- Folding
-vim.opt.foldlevel = 99
-vim.opt.foldmethod = "indent"
+-- Set up 'mini.deps' (customize to your liking)
+require('mini.deps').setup({ path = { package = path_package } })
 
--- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
+local add = MiniDeps.add
+
+add({ source = "https://github.com/nvim-treesitter/nvim-treesitter" })
+add({ source = "https://github.com/neovim/nvim-lspconfig" })
+add({ source = "https://github.com/mason-org/mason.nvim" })
+add({ source = "https://github.com/dasupradyumna/midnight.nvim" })
+
+require "mason".setup()
+require "mini.files".setup()
+require "mini.git".setup()
+require "mini.icons".setup()
+require "mini.notify".setup()
+require "mini.pick".setup()
+require "mini.statusline".setup()
+
+vim.lsp.enable({ "denols", "lua_ls", "rust_analyzer", })
+
+-- COLORSCHEME
+vim.cmd [[colorscheme midnight]]
+
+-- GLOBALS
+vim.g.maplocalleader = " "
+vim.g.mapleader = " "
+vim.g.loaded_netrwPlugin = 0
+
+-- OPTIONS
+vim.o.clipboard = "unnamedplus" -- Sync with system clipboard
+vim.o.completeopt = "menu,menuone,noselect,fuzzy"
+vim.o.hlsearch = false
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.smartindent = true
+vim.o.swapfile = false
+vim.o.winborder = "rounded"
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = -1
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.cursorline = true
+
+-- MAPPINGS
+local map = vim.keymap.set
+map('n', '<leader>w', ':update<CR>')
+map('n', '<leader>q', ':quit<CR>')
+map('n', '<leader>s', ':update<CR> :source $MYVIMRC<CR>')
+map('n', '<leader>t', '<C-w><S-t>')
+map('n', '<leader>f', vim.lsp.buf.format)
+map('n', '<leader>v', ':e $MYVIMRC<CR>')
+map('n', '<leader>4', ':split +terminal<CR><C-w>Jz14<CR>i')
+map('t', '<esc>', [[<C-\><C-n>]])
+map('n', '<leader>e', MiniFiles.open)
+map('n', '<leader><leader>', ':Pick files<CR>')
+map('n', '<leader>h', ':Pick help<CR>')
+
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap('', '<C-S-v>', '+p<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('!', '<C-S-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-S-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-S-v>', '<C-R>+', { noremap = true, silent = true })
+
+-- NEOVIDE
+if vim.g.neovide then
+  map('v', '<C-S-c>', '"+y')                 -- Copy
+  map('n', '<C-S-v>', '"+P')                 -- Paste normal mode
+  map('v', '<C-S-v>', '"+P')                 -- Paste visual mode
+  map('c', '<C-S-v>', '<C-R>+')              -- Paste command mode
+  map('i', '<C-S-v>', '<ESC>l"+Pli')         -- Paste insert mode
+  vim.o.guifont = "IosevkaTerm Nerd Font:14" -- text below applies for VimScript
+  vim.g.neovide_cursor_trail_size = 0
+end

@@ -54,7 +54,7 @@
         name:
           - ark
           - bat
-          - cliphist
+          # - cliphist
           - curl
           - deluge-gtk
           - direnv
@@ -70,13 +70,13 @@
           - fisher
           - fnm-bin
           - gwenview
-          - hyprcursor
-          - hypridle
-          - hyprland
-          - hyprlock
-          - hyprpaper
+          # - hyprcursor
+          # - hypridle
+          # - hyprland
+          # - hyprlock
+          # - hyprpaper
           - less
-          - mako
+          # - mako
           - neovim
           - nextcloud-client
           - nfs-utils
@@ -86,9 +86,8 @@
           - noto-fonts-extra
           - openssh
           - pipewire
-          - pipewire-pulse
           - plasma
-          - polkit-kde-agent
+          # - polkit-kde-agent
           - pyenv
           - ripgrep
           - rust-analyzer
@@ -99,14 +98,15 @@
           - stow
           - tree-sitter-cli
           - ttf-iosevkaterm-nerd
-          - uwsm
+          # - uwsm
           - vlc
           - visual-studio-code-bin
-          - waybar
+          # - waybar
           - wezterm
           - wl-clipboard
-          - wofi
-          - xdg-desktop-portal-hyprland
+          - wireplumber
+          # - wofi
+          # - xdg-desktop-portal-hyprland
 
     - name: Remove the `aur_builder` user
       become: true
