@@ -1,9 +1,0 @@
-{
-    "workbench.startupEditor": "none",
-    "workbench.sideBar.location": "right",
-    "editor.fontFamily": "'IosevkaTerm Nerd Font','Droid Sans Mono', 'monospace', monospace",
-    "editor.fontLigatures": true,
-    "files.autoSave": "afterDelay",
-    "editor.formatOnSave": true,
-    "editor.minimap.enabled": false
-}

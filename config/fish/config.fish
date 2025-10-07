@@ -18,10 +18,7 @@ alias l="exa --long --group --time-style long-iso --header --all"
 alias ll="exa --long --group --time-style long-iso --header --all"
 alias dup="docker compose up --detach --remove-orphans"
 alias dwn="docker compose down --remove-orphans"
+alias dlg="docker compose logs -f"
 
 starship init fish | source
-fnm env --use-on-cd | source
-
-# Scaleway CLI autocomplete initialization.
-eval (scw autocomplete script shell=fish)
 direnv hook fish | source

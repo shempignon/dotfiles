@@ -3,8 +3,6 @@
         "format": "{icon} {capacity}%",
         "format-alt": "{icon} {time}",
         "format-charging": " {capacity}%",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
         "format-icons": [
             "",
             "",
@@ -27,40 +25,24 @@
         "format": "🧮 {usage}%",
         "tooltip": false
     },
-    "height": 24, // Waybar height (to be removed for auto height)
-    "hyprland/workspaces": {
-        "format": "{name}: {icon}",
-        "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
-            "default": "",
-            "focused": "",
-            "urgent": ""
-        },
-        "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "on-scroll-up": "hyprctl dispatch workspace e+1"
+    "sway/workspaces": {
+        "all-outputs": true,
+        "disable-scroll": true
     },
     "memory": {
         "format": "🐏 {}%"
     },
     "modules-center": [
-        "hyprland/window"
+        "sway/window"
     ],
     "modules-left": [
-        "hyprland/workspaces"
+        "sway/workspaces"
     ],
     "modules-right": [
-        "temperature",
-        "cpu",
-        "memory",
-        "battery",
         "tray",
         "clock"
     ],
-    "position": "top", // Waybar position (top|bottom|left|right)
+    "position": "bottom",
     "temperature": {
         "critical-threshold": 80,
         "format": "{icon} {temperatureC}°C",

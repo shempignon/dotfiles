@@ -16,7 +16,7 @@ input "type:keyboard" {
   xkb_layout fr
 }
 
-exec dax -ae sway
+# exec dax -ae sway
 exec nm-applet
 
 workspace 1 output DP-3
@@ -184,4 +184,3 @@ default_border none
 
 include /etc/sway/config.d/*
 
-exec waybar
