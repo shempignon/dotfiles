@@ -20,20 +20,28 @@ local add = MiniDeps.add
 add({ source = "https://github.com/nvim-treesitter/nvim-treesitter" })
 add({ source = "https://github.com/neovim/nvim-lspconfig" })
 add({ source = "https://github.com/mason-org/mason.nvim" })
-add({ source = "https://github.com/dasupradyumna/midnight.nvim" })
+add({ source = "catppuccin/nvim", name = "catppuccin" })
 
 require "mason".setup()
-require "mini.files".setup()
 require "mini.git".setup()
 require "mini.icons".setup()
 require "mini.notify".setup()
 require "mini.pick".setup()
 require "mini.statusline".setup()
 
+
 vim.lsp.enable({ "denols", "lua_ls", "rust_analyzer", })
 
 -- COLORSCHEME
-vim.cmd [[colorscheme midnight]]
+require "catppuccin".setup({
+  transparent_background = true,
+  float = {
+    transparent = true,
+  },
+})
+vim.cmd [[
+  colorscheme catppuccin
+]]
 
 -- GLOBALS
 vim.g.maplocalleader = " "
@@ -66,7 +74,6 @@ map('n', '<leader>f', vim.lsp.buf.format)
 map('n', '<leader>v', ':e $MYVIMRC<CR>')
 map('n', '<leader>4', ':split +terminal<CR><C-w>Jz14<CR>i')
 map('t', '<esc>', [[<C-\><C-n>]])
-map('n', '<leader>e', MiniFiles.open)
 map('n', '<leader><leader>', ':Pick files<CR>')
 map('n', '<leader>h', ':Pick help<CR>')
 
