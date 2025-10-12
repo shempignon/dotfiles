@@ -25,24 +25,32 @@
         "format": "🧮 {usage}%",
         "tooltip": false
     },
-    "sway/workspaces": {
+    "hyprland/workspaces": {
         "all-outputs": true,
         "disable-scroll": true
+    },
+    "hyprland/window": {
+      "rewrite": {
+        "(.*) — Mozilla Firefox": "🌎 $1",
+        "(.*) - fish": "> [$1]"
+      },
+      "separate-outputs": true
     },
     "memory": {
         "format": "🐏 {}%"
     },
     "modules-center": [
-        "sway/window"
+        "hyprland/window"
     ],
     "modules-left": [
-        "sway/workspaces"
+        "hyprland/workspaces"
     ],
     "modules-right": [
         "tray",
         "clock"
     ],
     "position": "bottom",
+    "height": 30,
     "temperature": {
         "critical-threshold": 80,
         "format": "{icon} {temperatureC}°C",

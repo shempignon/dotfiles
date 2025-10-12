@@ -40,7 +40,8 @@ require "catppuccin".setup({
   },
 })
 vim.cmd [[
-  colorscheme catppuccin
+  colorscheme catppuccin-mocha
+
 ]]
 
 -- GLOBALS
