@@ -54,7 +54,6 @@
         name:
           - ark
           - bat
-          # - cliphist
           - curl
           - deluge-gtk
           - direnv
@@ -63,6 +62,7 @@
           - docker-compose
           - dolphin
           - dolphin-plugins
+          - dunst
           - eza
           - ffmpegthumbs
           - firefox
@@ -70,43 +70,35 @@
           - fisher
           - fnm-bin
           - gwenview
-          # - hyprcursor
-          # - hypridle
-          # - hyprland
-          # - hyprlock
-          # - hyprpaper
+          - hyprland
+          - hyprpaper
           - less
-          # - mako
+          - man
           - neovim
-          - nextcloud-client
           - nfs-utils
           - noto-fonts
           - noto-fonts-emoji
           - noto-fonts-cjk
           - noto-fonts-extra
           - openssh
+          - pavucontrol
           - pipewire
-          - plasma
-          # - polkit-kde-agent
+          - polkit-kde-agent
           - pyenv
           - ripgrep
           - rust-analyzer
-          - s3cmd
-          - scaleway-cli
-          - spectacle
           - starship
           - stow
           - tree-sitter-cli
           - ttf-iosevkaterm-nerd
-          # - uwsm
+          - uwsm
           - vlc
-          - visual-studio-code-bin
-          # - waybar
+          - waybar
           - wezterm
           - wl-clipboard
           - wireplumber
-          # - wofi
-          # - xdg-desktop-portal-hyprland
+          - wofi
+          - xdg-desktop-portal-hyprland
 
     - name: Remove the `aur_builder` user
       become: true
@@ -141,10 +133,16 @@
         name: sddm.service
         enabled: true
 
-    - name: Enable bluetooth service
-      become: true
+    - name: Enable hyprpaper service
       ansible.builtin.systemd:
-        name: bluetooth.service
+        name: hyprpaper.service
+        scope: user
+        enabled: true
+
+    - name: Enable waybar service
+      ansible.builtin.systemd:
+        name: waybar.service
+        scope: user
         enabled: true
 
     - name: Register user_shell
