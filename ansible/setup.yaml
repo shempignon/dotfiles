@@ -86,6 +86,7 @@
           - polkit-kde-agent
           - pyenv
           - ripgrep
+          - rofi
           - rust-analyzer
           - starship
           - stow
@@ -97,7 +98,6 @@
           - wezterm
           - wl-clipboard
           - wireplumber
-          - wofi
           - xdg-desktop-portal-hyprland
 
     - name: Remove the `aur_builder` user
