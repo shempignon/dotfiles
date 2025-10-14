@@ -21,6 +21,15 @@ add({ source = "https://github.com/nvim-treesitter/nvim-treesitter" })
 add({ source = "https://github.com/neovim/nvim-lspconfig" })
 add({ source = "https://github.com/mason-org/mason.nvim" })
 add({ source = "catppuccin/nvim", name = "catppuccin" })
+add({
+  source = 'nvim-neo-tree/neo-tree.nvim',
+  checkout = 'v3.x',
+  depends = {
+    "nvim-lua/plenary.nvim",
+    "MunifTanjim/nui.nvim",
+    "nvim-tree/nvim-web-devicons", -- optional, but recommended
+  }
+})
 
 require "mason".setup()
 require "mini.git".setup()
@@ -77,6 +86,11 @@ map('n', '<leader>4', ':split +terminal<CR><C-w>Jz14<CR>i')
 map('t', '<esc>', [[<C-\><C-n>]])
 map('n', '<leader><leader>', ':Pick files<CR>')
 map('n', '<leader>h', ':Pick help<CR>')
+map('n', '<leader>e', ':Neotree filesystem toggle right<CR>')
+map('n', 'gK', function()
+  local new_config = not vim.diagnostic.config().virtual_lines
+  vim.diagnostic.config({ virtual_lines = new_config })
+end, { desc = 'Toggle diagnostic virtual_lines' })
 
 -- Allow clipboard copy paste in neovim
 vim.api.nvim_set_keymap('', '<C-S-v>', '+p<CR>', { noremap = true, silent = true })
