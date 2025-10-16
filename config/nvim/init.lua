@@ -17,9 +17,9 @@ require('mini.deps').setup({ path = { package = path_package } })
 
 local add = MiniDeps.add
 
-add({ source = "https://github.com/nvim-treesitter/nvim-treesitter" })
-add({ source = "https://github.com/neovim/nvim-lspconfig" })
-add({ source = "https://github.com/mason-org/mason.nvim" })
+add({ source = "nvim-treesitter/nvim-treesitter", checkout = "master" })
+add({ source = "neovim/nvim-lspconfig" })
+add({ source = "mason-org/mason.nvim" })
 add({ source = "catppuccin/nvim", name = "catppuccin" })
 add({
   source = 'nvim-neo-tree/neo-tree.nvim',
@@ -30,16 +30,27 @@ add({
     "nvim-tree/nvim-web-devicons", -- optional, but recommended
   }
 })
+add({ source = "folke/which-key.nvim" })
+add({ source = "akinsho/toggleterm.nvim" })
+add({
+  source = "nvim-telescope/telescope.nvim",
+  checkout = '0.1.8',
+  depends = { "nvim-lua/plenary.nvim", }
+})
 
 require "mason".setup()
 require "mini.git".setup()
 require "mini.icons".setup()
 require "mini.notify".setup()
-require "mini.pick".setup()
 require "mini.statusline".setup()
+require "toggleterm".setup()
+require "nvim-treesitter.configs".setup({
+  ensure_installed = { "lua", "rust", "json", "html", "vento", "typescript", "sql", "javascript" },
+  highlight = { enable = true },
+})
 
 
-vim.lsp.enable({ "denols", "lua_ls", "rust_analyzer", })
+vim.lsp.enable({ "denols", "lua_ls", "rust_analyzer", "jsonls" })
 
 -- COLORSCHEME
 require "catppuccin".setup({
@@ -50,7 +61,6 @@ require "catppuccin".setup({
 })
 vim.cmd [[
   colorscheme catppuccin-mocha
-
 ]]
 
 -- GLOBALS
@@ -82,15 +92,18 @@ map('n', '<leader>s', ':update<CR> :source $MYVIMRC<CR>')
 map('n', '<leader>t', '<C-w><S-t>')
 map('n', '<leader>f', vim.lsp.buf.format)
 map('n', '<leader>v', ':e $MYVIMRC<CR>')
-map('n', '<leader>4', ':split +terminal<CR><C-w>Jz14<CR>i')
+map('n', '<leader>4', ':ToggleTerm<CR>')
 map('t', '<esc>', [[<C-\><C-n>]])
-map('n', '<leader><leader>', ':Pick files<CR>')
-map('n', '<leader>h', ':Pick help<CR>')
 map('n', '<leader>e', ':Neotree filesystem toggle right<CR>')
 map('n', 'gK', function()
   local new_config = not vim.diagnostic.config().virtual_lines
   vim.diagnostic.config({ virtual_lines = new_config })
 end, { desc = 'Toggle diagnostic virtual_lines' })
+local builtin = require('telescope.builtin')
+map('n', '<leader><leader>', builtin.find_files, { desc = 'Telescope find files' })
+map('n', '<leader>tg', builtin.live_grep, { desc = 'Telescope live grep' })
+map('n', '<leader>tr', builtin.lsp_references, { desc = 'Telescope lsp references' })
+map('n', '<leader>ts', builtin.lsp_document_symbols, { desc = 'Telescope lsp symbols' })
 
 -- Allow clipboard copy paste in neovim
 vim.api.nvim_set_keymap('', '<C-S-v>', '+p<CR>', { noremap = true, silent = true })
@@ -108,3 +121,12 @@ if vim.g.neovide then
   vim.o.guifont = "IosevkaTerm Nerd Font:14" -- text below applies for VimScript
   vim.g.neovide_cursor_trail_size = 0
 end
+
+
+-- AUTOCOMMANDS
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end
+})

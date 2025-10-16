@@ -22,3 +22,4 @@ alias dlg="docker compose logs -f"
 
 starship init fish | source
 direnv hook fish | source
+fnm env --use-on-cd --shell fish | source
